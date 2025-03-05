@@ -62,7 +62,7 @@ CREATE TABLE ClassAssignments (
 CREATE TABLE Saleries (
     id INT PRIMARY KEY AUTO_INCREMENT,
     userID INT NOT NULL,
-    wage FLOAT NOT NULL,
+    wage DECIMAL NOT NULL,
     FOREIGN KEY (userID) REFERENCES Users(id)
 );
 

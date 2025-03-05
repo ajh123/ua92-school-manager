@@ -46,7 +46,7 @@
 ## Saleries
 - `id`: `INT` **PK**
 - `userID`: `INT` **FK -> Users**
-- `wage`: `FLOAT NOT NULL`
+- `wage`: `DECIMAL NOT NULL`
 
 *Represents a user's salery per hour*
 
