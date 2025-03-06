@@ -1,0 +1,9 @@
+services:
+  app:
+    build: .
+    volumes:
+      - ./src:/var/www/html/
+    ports:
+      - 8080:80
+    env_file:
+      - .env
