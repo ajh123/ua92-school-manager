@@ -1,3 +1,5 @@
+# Generic User management
+
 ## Roles
 - `id`: `INT` **PK**
 - `permissions`: `TEXT NOT NULL`
@@ -17,38 +19,65 @@
 ## Users
 - `id`: `INT` **PK**
 - `name`: `VARCHAR(100) NOT NULL`
-- `roleID`: `INT NOT NULL` **FK -> Role**
+- `roleID`: `INT NOT NULL` **FK -> Roles**
 - `email`: `VARCHAR(100) UNIQUE NOT NULL`
 - `contactID`: `INT` **FK -> ContactInformation**
 - `password`: `VARCHAR(500) NOT NULL`
+- `avatarURL`: `VARCHAR(1000)`
 
 *Represents all people in the system*
 
-## GuardianAssignments
+## Groups
 - `id`: `INT` **PK**
-- `guardianID`: `INT` **FK -> Users**
-- `userID`: `INT` **FK -> Users**
-- `relationship`: `ENUM(PARENT, GUARDIAN, CAREER) NOT NULL`
+- `name`: `VARCHAR(100) NOT NULL`
 
-## Classes
+## GroupAssignments
 - `id`: `INT` **PK**
-- `capacity`: `INT`
-- `name`: `VARCHAR(100)`
-- `startTime`: `TIME`
-- `endTime`: `TIME`
-- `teacherID`: `INT` **FK -> Users** (only if the User has a TEACHER role)
+- `group`: `INT NOT NULL` **FK -> Group**
+- `userID`: `INT MOT NULL` **FK -> Users**
 
-## ClassAssignments
-- `id`: `INT` **PK**
-- `classID`: `INT` **FK -> Classes**
-- `studentID`: `INT` **FK -> Users** (only if the User has a STUDENT role)
+# Job management
 
-## Saleries
+## Salaries
 - `id`: `INT` **PK**
 - `userID`: `INT` **FK -> Users**
 - `wage`: `DECIMAL NOT NULL`
 
 *Represents a user's salery per hour*
+
+# Student management
+
+## GuardianAssignments
+- `id`: `INT` **PK**
+- `guardianID`: `INT NOT NULL` **FK -> Users**
+- `userID`: `INT MOT NULL` **FK -> Users**
+- `relationship`: `ENUM(PARENT, GUARDIAN, CAREER) NOT NULL`
+
+## Classes
+- `id`: `INT` **PK**
+- `capacity`: `INT NOT NULL`
+- `name`: `VARCHAR(100) NOT NULL`
+- `startTime`: `TIME NOT NULL`
+- `endTime`: `TIME NOT NULL`
+- `teacherID`: `INT` **FK -> Users** (only if the User has a TEACHER role)
+- `daysOfWeek`: `INT NOT NULL` (actually a bitmask stored as a binary int, eg Monday, Wednesday, and Friday = `0101010`)
+- `startDate`: `DATE NOT NULL`
+- `endDate`: `DATE NOT NULL`
+
+## ClassAssignments
+- `id`: `INT` **PK**
+- `classID`: `INT` **FK -> Classes**
+- `groupID`: `INT` **FK -> Groups** (only if the User in the group has a STUDENT role)
+
+## Attendance
+- `id`: `INT` **PK**
+- `userID`: `INT NOT NULL` **FK > Users**
+- `classID`: `INT NOT NULL` **FK > Classes**
+- `type`: `ENUM(PRESENT, LATE, UNAUTHORISED_ABSENT, AUTHORISED_ABSENT, EXPELLED) NOT NULL`
+- `comments`: `TEXT`
+- `whenMarked`: `DATETIME NOT NULL`
+
+# Library management
 
 ## Books
 - `id`: `INT` **PK**
@@ -61,5 +90,5 @@
 - `id`: `INT` **PK**
 - `bookID`: `INT` **FK -> Books**
 - `userID`: `INT` **FK -> Users**
-- `whenHandOut`: `DATETIME`
-- `whenDueIn`: `DATETIME`
+- `whenHandOut`: `DATETIME NOT NULL`
+- `whenDueIn`: `DATETIME NOT NULL`

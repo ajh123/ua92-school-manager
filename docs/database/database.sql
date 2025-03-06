@@ -1,11 +1,9 @@
--- Create Roles Table
 CREATE TABLE Roles (
     id INT PRIMARY KEY AUTO_INCREMENT,
     permissions TEXT NOT NULL,
     name VARCHAR(100) NOT NULL
 );
 
--- Create ContactInformation Table
 CREATE TABLE ContactInformation (
     id INT PRIMARY KEY AUTO_INCREMENT,
     addressLine1 VARCHAR(200) NOT NULL,
@@ -16,19 +14,38 @@ CREATE TABLE ContactInformation (
     postcode VARCHAR(20) NOT NULL
 );
 
--- Create Users Table
 CREATE TABLE Users (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
-    password VARCHAR(500) NOT NULL,
     roleID INT NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     contactID INT,
+    password VARCHAR(500) NOT NULL,
+    avatarURL VARCHAR(1000),
     FOREIGN KEY (roleID) REFERENCES Roles(id),
     FOREIGN KEY (contactID) REFERENCES ContactInformation(id)
 );
 
--- Create GuardianAssignments Table
+CREATE TABLE Groups (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE GroupAssignments (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    groupID INT NOT NULL,
+    userID INT NOT NULL,
+    FOREIGN KEY (groupID) REFERENCES Groups(id),
+    FOREIGN KEY (userID) REFERENCES Users(id)
+);
+
+CREATE TABLE Salaries (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    userID INT,
+    wage DECIMAL NOT NULL,
+    FOREIGN KEY (userID) REFERENCES Users(id)
+);
+
 CREATE TABLE GuardianAssignments (
     id INT PRIMARY KEY AUTO_INCREMENT,
     guardianID INT NOT NULL,
@@ -38,35 +55,38 @@ CREATE TABLE GuardianAssignments (
     FOREIGN KEY (userID) REFERENCES Users(id)
 );
 
--- Create Classes Table
 CREATE TABLE Classes (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    capacity INT,
-    name VARCHAR(100),
-    startTime TIME,
-    endTime TIME,
+    capacity INT NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    startTime TIME NOT NULL,
+    endTime TIME NOT NULL,
     teacherID INT,
-    FOREIGN KEY (teacherID) REFERENCES Users(id) 
+    daysOfWeek INT NOT NULL,
+    startDate DATE NOT NULL,
+    endDate DATE NOT NULL,
+    FOREIGN KEY (teacherID) REFERENCES Users(id)
 );
 
--- Create ClassAssignments Table
 CREATE TABLE ClassAssignments (
     id INT PRIMARY KEY AUTO_INCREMENT,
     classID INT NOT NULL,
-    studentID INT NOT NULL,
+    groupID INT NOT NULL,
     FOREIGN KEY (classID) REFERENCES Classes(id),
-    FOREIGN KEY (studentID) REFERENCES Users(id)
+    FOREIGN KEY (groupID) REFERENCES Groups(id)
 );
 
--- Create Saleries Table
-CREATE TABLE Saleries (
+CREATE TABLE Attendance (
     id INT PRIMARY KEY AUTO_INCREMENT,
     userID INT NOT NULL,
-    wage DECIMAL NOT NULL,
-    FOREIGN KEY (userID) REFERENCES Users(id)
+    classID INT NOT NULL,
+    type ENUM('PRESENT', 'LATE', 'UNAUTHORISED_ABSENT', 'AUTHORISED_ABSENT', 'EXPELLED') NOT NULL,
+    comments TEXT,
+    whenMarked DATETIME NOT NULL,
+    FOREIGN KEY (userID) REFERENCES Users(id),
+    FOREIGN KEY (classID) REFERENCES Classes(id)
 );
 
--- Create Books Table
 CREATE TABLE Books (
     id INT PRIMARY KEY AUTO_INCREMENT,
     isbn VARCHAR(20) NOT NULL,
@@ -75,13 +95,12 @@ CREATE TABLE Books (
     inStock INT NOT NULL
 );
 
--- Create BookAssignments Table
 CREATE TABLE BookAssignments (
     id INT PRIMARY KEY AUTO_INCREMENT,
     bookID INT NOT NULL,
     userID INT NOT NULL,
-    whenHandOut DATETIME,
-    whenDueIn DATETIME,
+    whenHandOut DATETIME NOT NULL,
+    whenDueIn DATETIME NOT NULL,
     FOREIGN KEY (bookID) REFERENCES Books(id),
     FOREIGN KEY (userID) REFERENCES Users(id)
 );
