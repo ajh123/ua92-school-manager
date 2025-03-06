@@ -2,11 +2,15 @@ FROM ubuntu
 
 # Install Apache, PHP, and required modules
 RUN apt update && \
-    apt install -y apache2 apache2-utils php libapache2-mod-php && \
+    apt install -y apache2 apache2-utils php libapache2-mod-php php-mysql && \
     apt clean 
 
 # Enable the correct PHP module (detects installed PHP version)
 RUN a2enmod php$(php -r "echo PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION;")
+
+# Find the correct php.ini file and enable the MySQLi extension
+RUN PHP_INI=$(php -r "echo php_ini_loaded_file();") && \
+    echo "extension=mysqli.so" >> $PHP_INI
 
 # Copy the entire `src/` directory to `/var/www/html/`
 COPY src/ /var/www/html/
