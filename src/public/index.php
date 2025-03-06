@@ -15,8 +15,9 @@ include "../db.php";
 <body>
     <nav class="navbar" aria-label="Main navigation">
         <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="/index.php">Home</a></li>
+            <li><a href="/contact.php">Contact Us</a></li>
+            <li><a href="/portal/index.php">Portal</a></li>
         </ul>
     </nav>
     <header class="header flex-container">

@@ -33,16 +33,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="/assets/css/nav.css">
 </head>
 <body>
+    <nav class="navbar" aria-label="Main navigation">
+        <ul>
+            <li><a href="/index.php">Home</a></li>
+            <li><a href="/contact.php">Contact Us</a></li>
+            <li><a href="/portal/index.php">Portal</a></li>
+        </ul>
+    </nav>
     <main>
-        <form method="post">
-            <h1>Login</h1>
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" required>
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" required>
-            <button type="submit">Login</button>
-            <p>Don't have an account? Contact the school administrator.<p>
-        </form>
+        <section class="section">
+            <h2>Login</h2>
+            <form method="post">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" required>
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" required>
+                <button type="submit">Login</button>
+                <p>Don't have an account? Contact the school administrator.<p>
+            </form>
+        </section>
     </main>
 </body>
 </html>

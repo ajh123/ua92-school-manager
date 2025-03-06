@@ -9,10 +9,11 @@
     <link rel="stylesheet" href="/assets/css/nav.css">
 </head>
 <body>
-    <nav class="navbar" aria-label="Main navigation">
+<nav class="navbar" aria-label="Main navigation">
         <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="/index.php">Home</a></li>
+            <li><a href="/contact.php">Contact Us</a></li>
+            <li><a href="/portal/index.php">Portal</a></li>
         </ul>
     </nav>
     <main>
@@ -23,7 +24,7 @@
                 <input name="email" type="email" required>
                 <label for="message">Your message</label>
                 <textarea name="message" required></textarea>
-                <input type="submit">
+                <button type="submit">Send</button>
             </form>
         </section>
     </main>
