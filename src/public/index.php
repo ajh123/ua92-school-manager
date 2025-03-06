@@ -8,9 +8,9 @@ include "../db.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>St Alphonsus Primary School</title>
-    <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/containers.css">
-    <link rel="stylesheet" href="assets/css/nav.css">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/containers.css">
+    <link rel="stylesheet" href="/assets/css/nav.css">
 </head>
 <body>
     <nav class="navbar" aria-label="Main navigation">
