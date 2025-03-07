@@ -6,11 +6,13 @@ A PHP based website to manage the operations of a school
 1. `docker build -t school .`
 2. `docker run --env-file .env -d -p 8080:80 school`
 
-## Envrionment variables:
+## Configuration
 
-Create a .env file with these values 
+Copy `src/config.sample.php` to `src/config.php` and update the settings to your values:
 
-- `DB_HOST=<your server IP>`
-- `DB_USERNAME=<your db user name>`
-- `DB_PASSWORD=<your account name>`
-- `DB_NAME=<the database name>`
+```php
+$DB_HOST = "localhost";
+$DB_USERNAME = "username";
+$DB_PASSWORD = "password";
+$DB_NAME = "db";
+```
