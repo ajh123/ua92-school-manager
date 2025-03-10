@@ -1,7 +1,10 @@
 <?php
 include __DIR__  . "/../../utils/auth.php";
+include __DIR__  . "/../../utils/forms.php";
 
 session_start();
+clear_errors();
+clear_values();
 
 if (is_logged_in()) {
     header("Location: index.php");
@@ -14,7 +17,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = login($email, $unhashed_password);
 
     if ($result == false) {
-        echo "Invalid email or password";
+        push_error("form", "Invalid email or password");
+        push_error("email", "Email is invalid");
+        push_error("password", "Password is invalid");
+
+        push_value("email", $email);
+        push_value("password", $unhashed_password);
     } else {
         $_SESSION["user"] = $result;
         header("Location: /portal/index.php");
@@ -68,13 +76,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="container">
                 <h2>Login</h2>
                 <form method="post">
+                    <p class="help is-danger"><?= get_error("form"); ?></p>
                     <div class="field">
                         <label class="label" for="email">Email</label>
-                        <input class="input" name="email" type="email" required>
+                        <input class="input <?= get_error("email") ? "is-danger" : "" ?>" name="email" type="email" required value="<?= get_value("email"); ?>"/>
+                        <p class="help is-danger"><?= get_error("email"); ?></p>
                     </div>
                     <div class="field">
                         <label class="label" for="password">Password</label>
-                        <input class="input" name="password" required type="password"></textarea>
+                        <input class="input <?= get_error("password") ? "is-danger" : "" ?>" name="password" required type="password" value="<?= get_value("password"); ?>"/>
+                        <p class="help is-danger"><?= get_error("password"); ?></p>
                     </div>
                     <div class="control">
                         <button class="button is-primary">Send</button>
