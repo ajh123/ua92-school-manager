@@ -40,7 +40,7 @@
 
 ## Salaries
 - `id`: `INT` **PK**
-- `userID`: `INT` **FK -> Users**
+- `roleID`: `INT` **FK -> Roles**
 - `wage`: `DECIMAL NOT NULL`
 
 *Represents a user's salery per hour*

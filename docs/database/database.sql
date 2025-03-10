@@ -41,9 +41,9 @@ CREATE TABLE GroupAssignments (
 
 CREATE TABLE Salaries (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    userID INT,
+    roleID INT,
     wage DECIMAL NOT NULL,
-    FOREIGN KEY (userID) REFERENCES Users(id)
+    FOREIGN KEY (roleID) REFERENCES Roles(id)
 );
 
 CREATE TABLE GuardianAssignments (
