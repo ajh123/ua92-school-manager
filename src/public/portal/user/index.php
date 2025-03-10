@@ -50,19 +50,19 @@ $u = $_SESSION["user"];
                 </div>
                 <div id="mainNavbar" class="navbar-menu">
                     <div class="navbar-start">
-                        <a class="navbar-item" href="/portal/books.php">
+                        <a class="navbar-item" href="/portal/user/">
                             Your details
                         </a>
-                        <a class="navbar-item" href="/portal/contact.php">
+                        <a class="navbar-item" href="/portal/user/contact.php">
                             Your contact information
                         </a>
-                        <a class="navbar-item" href="/portal/classes.php">
+                        <a class="navbar-item" href="/portal/user/classes.php">
                             Your classes
                         </a>
-                        <a class="navbar-item" href="/portal/salery.php">
+                        <a class="navbar-item" href="/portal/user/salery.php">
                             Your salery
                         </a>
-                        <a class="navbar-item" href="/portal/books.php">
+                        <a class="navbar-item" href="/portal/user/books.php">
                             Your books
                         </a>
                     </div>
