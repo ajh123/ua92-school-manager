@@ -1,5 +1,5 @@
 <?php
-include "../../auth.php";
+include __DIR__  . "/../../utils/auth.php";
 
 session_start();
 
