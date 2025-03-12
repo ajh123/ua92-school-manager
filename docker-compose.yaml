@@ -2,6 +2,6 @@ services:
   backend:
     build: .
     volumes:
-      - ./backend:/var/www/html/
+      - ./src:/var/www/html/
     ports:
       - 8081:80
