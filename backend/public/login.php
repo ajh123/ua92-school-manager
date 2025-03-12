@@ -1,6 +1,6 @@
 <?php
-include __DIR__  . "/../../utils/auth.php";
-include __DIR__  . "/../../utils/forms.php";
+include __DIR__  . "/../utils/auth.php";
+include __DIR__  . "/../utils/forms.php";
 
 session_start();
 clear_errors();
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         push_value("password", $unhashed_password);
     } else {
         $_SESSION["user"] = $result;
-        header("Location: /portal/index.php");
+        header("Location: index.php");
     }
 }
 ?>

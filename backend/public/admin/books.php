@@ -3,8 +3,7 @@ include __DIR__  . "/../../utils/auth.php";
 
 session_start();
 
-if (is_logged_in()) {
-    logout();
+if (!is_logged_in()) {
+    header("Location: /login.php");
 }
-header("Location: /index.php");
-
+?>
