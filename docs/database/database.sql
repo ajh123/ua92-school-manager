@@ -11,19 +11,28 @@ CREATE TABLE ContactInformation (
     city VARCHAR(100) NOT NULL,
     state VARCHAR(100) NOT NULL,
     country VARCHAR(100) NOT NULL,
-    postcode VARCHAR(20) NOT NULL
+    postcode VARCHAR(20) NOT NULL,
+    telephone VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE MedicalInformation (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    description VARCHAR(200) NOT NULL,
+    dateOfBirth DATE NOT NULL
 );
 
 CREATE TABLE Users (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
-    roleID INT NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    contactID INT,
+    email VARCHAR(100) UNIQUE NOT NULL,  
     password VARCHAR(500) NOT NULL,
     avatarURL VARCHAR(1000),
+    roleID INT NOT NULL,
     FOREIGN KEY (roleID) REFERENCES Roles(id),
-    FOREIGN KEY (contactID) REFERENCES ContactInformation(id)
+    contactID INT,
+    FOREIGN KEY (contactID) REFERENCES ContactInformation(id),
+    medicalID INT,
+    FOREIGN KEY (medicalID) REFERENCES MedicalInformation(id)
 );
 
 CREATE TABLE Groups (
@@ -103,4 +112,9 @@ CREATE TABLE BookAssignments (
     whenDueIn DATETIME NOT NULL,
     FOREIGN KEY (bookID) REFERENCES Books(id),
     FOREIGN KEY (userID) REFERENCES Users(id)
+);
+
+CREATE TABLE SiteSettings (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    companyName VARCHAR(200) NOT NULL
 );
