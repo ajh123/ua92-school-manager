@@ -17,7 +17,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = login($email, $unhashed_password);
 
     if ($result == false) {
-        push_error("form", "Invalid email or password");
         push_error("email", "Email is invalid");
         push_error("password", "Password is invalid");
 
@@ -36,64 +35,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
-    >
-    <script src="/assets/js/nav.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/5.3/examples/sign-in/sign-in.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
 </head>
-<body>
-    <nav class="navbar is-link" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-            <a class="navbar-item" href="/">
-                St Alphonsus Primary School
-            </a>
-            <a role="button" class="navbar-burger has-text-white" aria-label="menu" aria-expanded="false" data-target="mainNavbar">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            </a>
-        </div>
-        <div id="mainNavbar" class="navbar-menu">
-            <div class="navbar-start">
-                <a class="navbar-item" href="/index.php">
-                    Home
-                </a>
-                <a class="navbar-item" href="/contact.php">
-                    Contact Us
-                </a>
+<!-- BASED FROM `view-source:https://getbootstrap.com/docs/5.3/examples/sign-in/` ACCESSED 13/03/2025 - MIT LICENSE-->
+<body class="d-flex align-items-center py-4 bg-body-tertiary">
+    <main class="form-signin w-100 m-auto">
+        <form method="post">
+            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+            <div class="form-floating">
+                <input name="email" type="email" class="form-control <?= get_error("email") ? "is-invalid" : "" ?>" id="floatingInput" placeholder="name@example.com" aria-describedby="validationServerEmailFeedback" required value="<?= get_value("email"); ?>">
+                <label for="floatingInput">Email address</label>
+                <div id="validationServerEmailFeedback" class="invalid-feedback">
+                    <?= get_error("email"); ?>
+                </div>
             </div>
-            <div class="navbar-end">
-                <a class="navbar-item" href="/portal/index.php">
-                    Portal
-                </a>
+            <div class="form-floating">
+                <input name="password" type="password" class="form-control <?= get_error("password") ? "is-invalid" : "" ?>" id="floatingPassword" placeholder="Password" aria-describedby="validationServerPasswordFeedback" required value="<?= get_value("password"); ?>">
+                <label for="floatingPassword">Password</label>
+                <div id="validationServerPasswordFeedback" class="invalid-feedback">
+                    <?= get_error("password"); ?>
+                </div>
             </div>
-        </div>
-    </nav>
-    <main>
-        <div class="section">
-            <div class="container">
-                <h2>Login</h2>
-                <form method="post">
-                    <p class="help is-danger"><?= get_error("form"); ?></p>
-                    <div class="field">
-                        <label class="label" for="email">Email</label>
-                        <input class="input <?= get_error("email") ? "is-danger" : "" ?>" name="email" type="email" required value="<?= get_value("email"); ?>"/>
-                        <p class="help is-danger"><?= get_error("email"); ?></p>
-                    </div>
-                    <div class="field">
-                        <label class="label" for="password">Password</label>
-                        <input class="input <?= get_error("password") ? "is-danger" : "" ?>" name="password" required type="password" value="<?= get_value("password"); ?>"/>
-                        <p class="help is-danger"><?= get_error("password"); ?></p>
-                    </div>
-                    <div class="control">
-                        <button class="button is-primary">Send</button>
-                    </div>
-                </form>
-                <p>Don't have an account? Contact the school administrator.<p>
-            </div>
-        </div>
+            <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+            <p class="mt-5 mb-3 text-body-secondary">Don't have an account? Contact the school administrator.</p>
+            <p class="mt-5 mb-3 text-body-secondary">&copy; 2017 - 2025</p>
+        </form>
     </main>
 </body>
 </html>
