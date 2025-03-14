@@ -13,6 +13,7 @@ function login($email, $password) {
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
+
         // Verify the password against the stored hash
         if (password_verify($password, $row['password'])) {
             return $row;

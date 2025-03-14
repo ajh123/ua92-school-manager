@@ -1,4 +1,6 @@
 <?php
+include __DIR__  . "/db.php";
+
 function clear_errors() {
     $_SESSION["errors"] = [];
 }
@@ -35,4 +37,45 @@ function get_value($key) {
         return null;
     }
     return $_SESSION["values"][$key];
+}
+
+function echo_table($name) {
+    global $conn;
+    $sql = "SELECT * FROM ".$name;
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $all = false;
+    
+    if ($result->num_rows > 0) {
+        $all = $result->fetch_all(MYSQLI_ASSOC);
+    }
+    
+    if ($all != false) {
+        $keys = array_keys($all[0]);
+
+        echo '<div class="alert alert-success" role="alert">MySQL qurey was successfull. '.$result->num_rows.' rows were returned. </div>';
+
+        
+        echo '<table class="table table-striped table-sm">';
+        echo '<thead>';
+        echo '<tr>';
+        foreach ($keys as $key) {
+            echo '<th scope=\"col\">' . $key . '</th>';
+        }
+        echo '</tr>';
+        echo '</thead>';
+        echo '<tbody>';
+        foreach ($all as $row) {
+            echo "<tr>";
+            foreach ($row as $row_col) {
+                echo "<td>" . $row_col . "</td>";
+            }
+            echo "</tr>";
+        }
+        echo '</tbody>';
+        echo '</table>';
+    } else {
+        echo '<div class="alert alert-warning" role="alert">MySQL returned an empty response.</div>';
+    }
 }
