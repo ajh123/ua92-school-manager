@@ -50,17 +50,17 @@ echo <<<EOT
                     <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="/user/">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="/">
                                     Home
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="/user/classes.php">
+                                <a class="nav-link d-flex align-items-center gap-2" href="/query.php?table=Classes">
                                     Your classes
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="/user/books">
+                                <a class="nav-link d-flex align-items-center gap-2" href="/query.php?table=Books">
                                     Your books
                                 </a>
                             </li>
@@ -68,22 +68,22 @@ echo <<<EOT
                         <hr class="my-3">
                         <ul class="nav flex-column mb-auto">
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="/admin/users">
+                                <a class="nav-link d-flex align-items-center gap-2" href="/query.php?table=Users">
                                     All users
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="/admin/roles">
+                                <a class="nav-link d-flex align-items-center gap-2" href="/query.php?table=Roles">
                                     All user roles
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="/admin/classes">
+                                <a class="nav-link d-flex align-items-center gap-2" href="/query.php?table=Classes">
                                     All classes
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="/admin/books">
+                                <a class="nav-link d-flex align-items-center gap-2" href="/query.php?table=Books">
                                     All books
                                 </a>
                             </li>
@@ -91,12 +91,12 @@ echo <<<EOT
                         <hr class="my-3">
                         <ul class="nav flex-column mb-auto">
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="/user/details">
+                                <a class="nav-link d-flex align-items-center gap-2" href="/">
                                     Your details
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="/admin/settings">
+                                <a class="nav-link d-flex align-items-center gap-2" href="/query.php?table=SiteSettings">
                                     Settings
                                 </a>
                             </li>

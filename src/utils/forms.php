@@ -39,9 +39,9 @@ function get_value($key) {
     return $_SESSION["values"][$key];
 }
 
-function echo_table($name) {
+function echo_table($name, $editable=true) {
     global $conn;
-    $sql = "SELECT * FROM ".$name;
+    $sql = "SELECT * FROM $name";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -53,29 +53,36 @@ function echo_table($name) {
     
     if ($all != false) {
         $keys = array_keys($all[0]);
-
-        echo '<div class="alert alert-success" role="alert">MySQL qurey was successfull. '.$result->num_rows.' rows were returned. </div>';
-
         
-        echo '<table class="table table-striped table-sm">';
-        echo '<thead>';
-        echo '<tr>';
-        foreach ($keys as $key) {
-            echo '<th scope=\"col\">' . $key . '</th>';
+        echo "<div class='alert alert-success' role='alert'>MySQL qurey was successfull. $result->num_rows rows were returned. </div>";
+        
+        if ($editable) {
+            echo "<button type='button' class='btn btn-light'>Insert into $name</button>";
         }
-        echo '</tr>';
-        echo '</thead>';
-        echo '<tbody>';
+
+        echo "<table class='table table-striped table-sm'>";
+        echo "<thead>";
+        echo "<tr>";
+        foreach ($keys as $key) {
+            echo "<th scope='col'>$key</th>";
+        }
+        echo "<th scope='col'>Operations</th>";
+        echo "</tr>";
+        echo "</thead>";
+        echo "<tbody>";
         foreach ($all as $row) {
             echo "<tr>";
             foreach ($row as $row_col) {
-                echo "<td>" . $row_col . "</td>";
+                echo "<td>$row_col</td>";
+            }
+            if ($editable) {
+                echo "<td><a>Edit</a> | <a>Delete</a></td>";
             }
             echo "</tr>";
         }
-        echo '</tbody>';
-        echo '</table>';
+        echo "</tbody>";
+        echo "</table>";
     } else {
-        echo '<div class="alert alert-warning" role="alert">MySQL returned an empty response.</div>';
+        echo "<div class='alert alert-warning' role='alert'>MySQL returned an empty response.</div>";
     }
 }
