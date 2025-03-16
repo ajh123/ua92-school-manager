@@ -12,6 +12,12 @@ if (!is_logged_in()) {
 $u = $_SESSION["user"];
 
 $table = $_GET["table"];
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    foreach ($_POST as $key => $value) {
+        echo "$key:$value\n";
+    }
+}
 ?>
 
 <?php begin_layout("Showing $table"); ?>
