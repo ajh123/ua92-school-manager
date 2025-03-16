@@ -1,5 +1,5 @@
 <?php
-include __DIR__  . "/db.php";
+include_once __DIR__  . "/db.php";
 
 function clear_errors() {
     $_SESSION["errors"] = [];
@@ -80,7 +80,7 @@ function echo_table($name, $editable=true) {
         echo "<div class='alert alert-success' role='alert'>MySQL query was successful. $result->num_rows rows were returned. </div>";
         
         if ($editable) {
-            echo "<a href='/edit.php?table=$name class='btn btn-light'>Insert into $name</a>";
+            echo "<a href='/edit.php?table=$name' class='btn btn-light'>Insert into $name</a>";
         }
 
         echo "<table class='table table-striped table-sm'>";
@@ -109,7 +109,7 @@ function echo_table($name, $editable=true) {
         echo "<div class='alert alert-warning' role='alert'>MySQL returned an empty response.</div>";
 
         if ($editable) {
-            echo "<button type='button' class='btn btn-light'>Insert into $name</button>";
+            echo "<a href='/edit.php?table=$name' class='btn btn-light'>Insert into $name</a>";
         }
     }
 }
@@ -136,7 +136,7 @@ function echo_form($name, $id=null) {
     }
 
     // Start form rendering
-    echo "<form action='process.php' method='POST'>";
+    echo "<form action='edit.php?table=$name' method='POST'>";
 
     while ($column = $result->fetch_assoc()) {
         $fieldName = htmlspecialchars($column['Field']);
@@ -145,13 +145,13 @@ function echo_form($name, $id=null) {
         $defaultValue = $column['Default'];
 
         // Determine input type based on column type
-        if (strpos($fieldType, 'int') !== false) {
+        if (strpos($fieldType, 'int') !== false) { // If the field type is an int, then render the input as a number
             $inputType = 'number';
-        } elseif (strpos($fieldType, 'varchar') !== false || strpos($fieldType, 'text') !== false) {
+        } elseif (strpos($fieldType, 'varchar') !== false || strpos($fieldType, 'text') !== false) { // if the field type is string based, then render the input as text
             $inputType = 'text';
-        } elseif (strpos($fieldType, 'date') !== false) {
+        } elseif (strpos($fieldType, 'date') !== false) { // if type is date render input as date
             $inputType = 'date';
-        } elseif (strpos($fieldType, 'enum') !== false) {
+        } elseif (strpos($fieldType, 'enum') !== false) { // if type is an enum then render a drop down select of the options
             preg_match("/enum\((.*)\)/", $fieldType, $matches);
             $enumValues = str_getcsv(str_replace("'", "", $matches[1]));
             $inputType = 'select';
@@ -160,21 +160,21 @@ function echo_form($name, $id=null) {
         }
 
         // Render input field
-        echo "<label for='$fieldName'>".ucwords(str_replace('_', ' ', $fieldName)).":</label>";
+        echo "<label for='$fieldName' class='form-label'>".ucwords(str_replace('_', ' ', $fieldName)).":</label>";
 
         if ($inputType === 'select') {
-            echo "<select name='$fieldName' id='$fieldName'>";
+            echo "<select name='$fieldName' id='$fieldName' class='form-select'>";
             foreach ($enumValues as $value) {
                 echo "<option value='$value'>$value</option>";
             }
             echo "</select>";
         } else {
-            echo "<input type='$inputType' name='$fieldName' id='$fieldName' value='$defaultValue' " . ($isNullable ? "" : "required") . ">";
+            echo "<input type='$inputType' class='form-control' name='$fieldName' id='$fieldName' value='$defaultValue' " . ($isNullable ? "" : "required") . ">";
         }
 
         echo "<br>";
     }
 
-    echo "<button type='submit'>Submit</button>";
+    echo "<button type='submit' class='btn btn-light'>Submit</button>";
     echo "</form>";
 }

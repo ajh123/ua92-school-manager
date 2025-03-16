@@ -1,5 +1,5 @@
 <?php
-include __DIR__  . "/db.php";
+include_once __DIR__  . "/db.php";
 
 const PAGE_ADMIN_BOOKS = "page.admin.books";
 const PAGE_ADMIN_ROLES = "page.admin.roles";

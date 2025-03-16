@@ -1,7 +1,7 @@
 <?php
-include __DIR__  . "/../utils/auth.php";
-include __DIR__  . "/../utils/admin_layout.php";
-include __DIR__  . "/../utils/forms.php";
+include_once __DIR__  . "/../utils/auth.php";
+include_once __DIR__  . "/../utils/admin_layout.php";
+include_once __DIR__  . "/../utils/forms.php";
 
 session_start();
 

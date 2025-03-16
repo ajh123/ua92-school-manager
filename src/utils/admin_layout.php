@@ -1,4 +1,5 @@
 <?php
+include_once __DIR__  . "/forms.php";
 
 function begin_layout($page) {
     $company_name = "School";
@@ -67,37 +68,19 @@ echo <<<EOT
                         </ul>
                         <hr class="my-3">
                         <ul class="nav flex-column mb-auto">
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="/query.php?table=Users">
-                                    All users
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="/query.php?table=Roles">
-                                    All user roles
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="/query.php?table=Classes">
-                                    All classes
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="/query.php?table=Books">
-                                    All books
-                                </a>
-                            </li>
+EOT;
+
+foreach (allowed_tables as $table) {
+    echo "<li class='nav-item'> <a class='nav-link d-flex align-items-center gap-2' href='/query.php?table=$table'> All $table </a> </li>";
+}
+
+echo <<<EOT
                         </ul>
                         <hr class="my-3">
                         <ul class="nav flex-column mb-auto">
                             <li class="nav-item">
                                 <a class="nav-link d-flex align-items-center gap-2" href="/">
                                     Your details
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="/query.php?table=SiteSettings">
-                                    Settings
                                 </a>
                             </li>
                             <li class="nav-item">
