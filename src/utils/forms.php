@@ -98,8 +98,9 @@ function echo_table($name, $editable=true) {
             foreach ($row as $row_col) {
                 echo "<td>$row_col</td>";
             }
+            $id = $row["id"];
             if ($editable) {
-                echo "<td><a>Edit</a> | <a>Delete</a></td>";
+                echo "<td><a href='/edit.php?table=$name&id=$id'>Edit</a> | <a>Delete</a></td>";
             }
             echo "</tr>";
         }
@@ -121,10 +122,17 @@ function echo_form($name, $id=null) {
     }
     global $conn;
 
-    if ($id == null) {
-
-    } else {
-
+    $existing_values = [];
+    if ($id != null) {
+        $sql = "SELECT * FROM $name WHERE id=?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        if ($result->num_rows > 0) {
+            $existing_values = $result->fetch_assoc();
+        }
     }
 
     // Query to get table schema
@@ -136,7 +144,7 @@ function echo_form($name, $id=null) {
     }
 
     // Start form rendering
-    echo "<form action='edit.php?table=$name' method='POST'>";
+    echo "<form action='edit.php?table=$name&id=$id' method='POST'>";
 
     while ($column = $result->fetch_assoc()) {
         $fieldName = htmlspecialchars($column['Field']);
@@ -161,6 +169,11 @@ function echo_form($name, $id=null) {
 
         // Render input field
         echo "<label for='$fieldName' class='form-label'>".ucwords(str_replace('_', ' ', $fieldName)).":</label>";
+
+
+        if (array_key_exists($fieldName, $existing_values)) {
+            $defaultValue = $existing_values[$fieldName];
+        }
 
         if ($inputType === 'select') {
             echo "<select name='$fieldName' id='$fieldName' class='form-select'>";
