@@ -114,7 +114,3 @@ CREATE TABLE BookAssignments (
     FOREIGN KEY (userID) REFERENCES Users(id)
 );
 
-CREATE TABLE SiteSettings (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    companyName VARCHAR(200) NOT NULL
-);
