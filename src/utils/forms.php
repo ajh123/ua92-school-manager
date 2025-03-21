@@ -1,5 +1,6 @@
 <?php
 include_once __DIR__  . "/db.php";
+include_once __DIR__  . "/../utils/permissions.php";
 
 function clear_errors() {
     $_SESSION["errors"] = [];
@@ -56,8 +57,14 @@ const allowed_tables = [
     "SiteSettings"
 ];
 
-function echo_table($name, $editable=true) {
-    if (!in_array($name, allowed_tables)) {
+function echo_table($name, $uid=null) {
+    $viewPermisson = strtolower("table.$name.view");
+    $viewable = has_permission($uid, $viewPermisson);
+
+    $editPermisson = strtolower("table.$name.edit");
+    $editable = has_permission($uid, $editPermisson);
+
+    if (!in_array($name, allowed_tables) | !$viewable) {
         echo "<div class='alert alert-danger' role='alert'>You are not allowed to access that table.</div>";
         return;
     }

@@ -43,6 +43,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
 
+        // Replace empty strings with null.
+        foreach ($values as $i => $value) {
+            if ($value === "") $values[$i] = null;
+        }
+
         // We dynamically create an insert command by using the table name and post date
         $placeholders = implode(", ", array_fill(0, count($columns), "?"));
         $sql = "INSERT INTO `$table` (" . implode(", ", $columns) . ") VALUES ($placeholders)";
