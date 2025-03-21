@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-<?php begin_layout("Showing $table"); ?>
+<?php begin_layout("Showing $table", $u["id"]); ?>
 <h2>Insert into <?php echo $table; ?></h2>
 
 <?php
