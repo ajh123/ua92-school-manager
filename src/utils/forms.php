@@ -53,8 +53,7 @@ const allowed_tables = [
     "ClassAssignments",
     "Attendance",
     "Books",
-    "BookAssignments",
-    "SiteSettings"
+    "BookAssignments"
 ];
 
 function echo_table($name, $uid=null) {
