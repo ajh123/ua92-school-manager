@@ -60,8 +60,11 @@ function echo_table($name, $uid=null) {
     $viewPermisson = strtolower("table.$name.view");
     $viewable = has_permission($uid, $viewPermisson);
 
-    $editPermisson = strtolower("table.$name.edit");
-    $editable = has_permission($uid, $editPermisson);
+    $updatePermisson = strtolower("table.$name.update");
+    $updateable = has_permission($uid, $updatePermisson);
+
+    $insertPermisson = strtolower("table.$name.insert");
+    $insertable = has_permission($uid, $insertPermisson);
 
     if (!in_array($name, allowed_tables) | !$viewable) {
         echo "<div class='alert alert-danger' role='alert'>You are not allowed to access that table.</div>";
@@ -85,8 +88,8 @@ function echo_table($name, $uid=null) {
         
         echo "<div class='alert alert-success' role='alert'>MySQL query was successful. $result->num_rows rows were returned. </div>";
         
-        if ($editable) {
-            echo "<a href='/edit.php?table=$name' class='btn btn-light'>Insert into $name</a>";
+        if ($insertable) {
+            echo "<a href='/insert.php?table=$name' class='btn btn-light'>Insert into $name</a>";
         }
 
         echo "<table class='table table-striped table-sm'>";
@@ -105,8 +108,8 @@ function echo_table($name, $uid=null) {
                 echo "<td>$row_col</td>";
             }
             $id = $row["id"];
-            if ($editable) {
-                echo "<td><a href='/edit.php?table=$name&id=$id'>Edit</a> | <a>Delete</a></td>";
+            if ($updateable) {
+                echo "<td><a href='/update.php?table=$name&id=$id'>Edit</a> | <a>Delete</a></td>";
             }
             echo "</tr>";
         }
@@ -115,13 +118,13 @@ function echo_table($name, $uid=null) {
     } else {
         echo "<div class='alert alert-warning' role='alert'>MySQL returned an empty response.</div>";
 
-        if ($editable) {
-            echo "<a href='/edit.php?table=$name' class='btn btn-light'>Insert into $name</a>";
+        if ($insertable) {
+            echo "<a href='/insert.php?table=$name' class='btn btn-light'>Insert into $name</a>";
         }
     }
 }
 
-function echo_form($name, $id=null) {
+function echo_form($name, $id=null, $page) {
     if (!in_array($name, allowed_tables)) {
         echo "<div class='alert alert-danger' role='alert'>You are not allowed to access that table.</div>";
         return;
@@ -150,7 +153,7 @@ function echo_form($name, $id=null) {
     }
 
     // Start form rendering
-    echo "<form action='edit.php?table=$name&id=$id' method='POST'>";
+    echo "<form action='$page?table=$name&id=$id' method='POST'>";
 
     while ($column = $result->fetch_assoc()) {
         $fieldName = htmlspecialchars($column['Field']);
