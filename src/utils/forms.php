@@ -66,6 +66,9 @@ function echo_table($name, $uid=null) {
     $insertPermisson = strtolower("table.$name.insert");
     $insertable = has_permission($uid, $insertPermisson);
 
+    $deletePermisson = strtolower("table.$name.delete");
+    $deleteable = has_permission($uid, $deletePermisson);
+
     if (!in_array($name, allowed_tables) | !$viewable) {
         echo "<div class='alert alert-danger' role='alert'>You are not allowed to access that table.</div>";
         return;
@@ -108,9 +111,14 @@ function echo_table($name, $uid=null) {
                 echo "<td>$row_col</td>";
             }
             $id = $row["id"];
+            echo "<td>";
             if ($updateable) {
-                echo "<td><a href='/update.php?table=$name&id=$id'>Edit</a> | <a>Delete</a></td>";
+                echo "| <a href='/update.php?table=$name&id=$id'>Edit</a> |";
             }
+            if ($deleteable) {
+                echo "| <a href='/delete.php?table=$name&id=$id'>Delete</a> |";
+            }
+            echo "</td>";
             echo "</tr>";
         }
         echo "</tbody>";
