@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $updatable == true) {
         // Dynamically create the update command
         $setPlaceholders = implode(", ", array_map(fn($col) => "`$col` = ?", $columns));
         $sql = "UPDATE `$table` SET $setPlaceholders WHERE `id` = ?";
-        
+
         // Add the ID to the values array for the WHERE clause
         $values[] = $id;
         $types .= is_int($id) ? "i" : "s"; // Adjust type binding for `id`

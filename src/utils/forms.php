@@ -81,16 +81,16 @@ function echo_table($name, $uid=null) {
     $stmt->execute();
     $result = $stmt->get_result();
     $all = false;
-    
+
     if ($result->num_rows > 0) {
         $all = $result->fetch_all(MYSQLI_ASSOC);
     }
-    
+
     if ($all != false) {
         $keys = array_keys($all[0]);
-        
+
         echo "<div class='alert alert-success' role='alert'>MySQL query was successful. $result->num_rows rows were returned. </div>";
-        
+
         if ($insertable) {
             echo "<a href='/insert.php?table=$name' class='btn btn-light'>Insert into $name</a>";
         }
@@ -146,7 +146,7 @@ function echo_form($name, $id=null, $page) {
         $stmt->bind_param("i", $id);
         $stmt->execute();
         $result = $stmt->get_result();
-    
+
         if ($result->num_rows > 0) {
             $existing_values = $result->fetch_assoc();
         }

@@ -41,7 +41,7 @@ function has_permission($uid, $permission) {
     foreach ($permissions as $perm) {
         // Convert wildcard '*' into a regex pattern
         $pattern = str_replace(['.', '*'], ['\.', '.*'], $perm);
-        
+
         // Check if the permission matches
         if (preg_match('/^' . $pattern . '$/', $permission)) {
             return true;

@@ -13,7 +13,7 @@ if (is_logged_in()) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $unhashed_password = $_POST["password"];
- 
+
     $result = login($email, $unhashed_password);
 
     if ($result == false) {
