@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href="https://getbootstrap.com/docs/5.3/examples/sign-in/sign-in.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
 </head>
-<!-- BASED FROM `view-source:https://getbootstrap.com/docs/5.3/examples/sign-in/` ACCESSED 13/03/2025 - MIT LICENSE-->
+<!-- SOURCE: `view-source:https://getbootstrap.com/docs/5.3/examples/sign-in/` ACCESSED 13/03/2025 - MIT LICENSE-->
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
     <main class="form-signin w-100 m-auto">
         <form method="post">
@@ -65,3 +65,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </main>
 </body>
 </html>
+<!-- END SOURCE -->

@@ -2,10 +2,19 @@
 include_once __DIR__  . "/db.php";
 include_once __DIR__  . "/../utils/permissions.php";
 
+/**
+ * Clears any error messages from memory
+ */
 function clear_errors() {
     $_SESSION["errors"] = [];
 }
 
+/**
+ * Updates error message memory to contain a value
+ * 
+ * @param string $key The id/key of the error message
+ * @param string $message The value of the message
+ */
 function push_error($key, $message) {
     if (!isset($_SESSION["errors"])) {
         clear_errors();
@@ -14,6 +23,13 @@ function push_error($key, $message) {
     $_SESSION["errors"][$key] = $message;
 }
 
+/**
+ * Gets the error message by key
+ * 
+ * @param $key The id/key of the error message
+ * @return null/string The value of the error message or 
+ * null if the message does not exist
+ */
 function get_error($key) {
     if (!isset($_SESSION["errors"][$key])) {
         return null;
@@ -21,18 +37,34 @@ function get_error($key) {
     return $_SESSION["errors"][$key];
 }
 
+/**
+ * Clears any form values from memory
+ */
 function clear_values() {
     $_SESSION["values"] = [];
 }
 
-function push_value($key, $message) {
+/**
+ * Updates form value memory to contain a value
+ * 
+ * @param string $key The id/key of the form value
+ * @param any $value The value of the form
+ */
+function push_value($key, $value) {
     if (!isset($_SESSION["values"])) {
         clear_values();
     }
 
-    $_SESSION["values"][$key] = $message;
+    $_SESSION["values"][$key] = $value;
 }
 
+/**
+ * Gets the form value by key
+ * 
+ * @param $key The id/key of the form value
+ * @return null/any The value of the value or 
+ * null if the value does not exist
+ */
 function get_value($key) {
     if (!isset($_SESSION["values"][$key])) {
         return null;
@@ -56,6 +88,12 @@ const allowed_tables = [
     "BookAssignments"
 ];
 
+/**
+ * Renders a database table on the page.
+ * 
+ * @param string $name The name of the database table
+ * @param int/null $uid The id of the current user viewing the table
+ */
 function echo_table($name, $uid=null) {
     $viewPermisson = strtolower("table.$name.view");
     $viewable = has_permission($uid, $viewPermisson);
@@ -132,6 +170,13 @@ function echo_table($name, $uid=null) {
     }
 }
 
+/**
+ * Renders a form based on a database table on the page.
+ * 
+ * @param string $name The name of the database table
+ * @param int/null $id The id of a row in the table
+ * @param string $page The file name of the current page
+ */
 function echo_form($name, $id=null, $page) {
     if (!in_array($name, allowed_tables)) {
         echo "<div class='alert alert-danger' role='alert'>You are not allowed to access that table.</div>";

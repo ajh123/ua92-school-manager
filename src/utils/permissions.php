@@ -1,6 +1,13 @@
 <?php
 include_once __DIR__  . "/db.php";
 
+/**
+ * For a given user, teturns an array of string where each
+ * string represents a permission.
+ * 
+ * @param int $uid The user ID
+ * @return string[] The array of permissions
+ */
 function get_user_permissions($uid) {
     global $conn;
 
@@ -32,6 +39,12 @@ function get_user_permissions($uid) {
     return null;
 }
 
+/**
+ * Returns a bolean if the user has the given permission.
+ * 
+ * @param int $uid The user ID
+ * @param string $ppermission The permission name to check for
+ */
 function has_permission($uid, $permission) {
     $permissions = get_user_permissions($uid);
     if ($permissions == null) {

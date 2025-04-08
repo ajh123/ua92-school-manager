@@ -10,6 +10,7 @@ function begin_layout($page, $uid=null) {
 
     $name = $u["name"];
 
+    /* START SOURCE: `view-source:https://getbootstrap.com/docs/5.3/examples/dashboard/` ACCESSED 13/03/2025 - MIT LICENSE */
 
 echo <<<EOT
 <!DOCTYPE html>
@@ -22,7 +23,6 @@ echo <<<EOT
     <link href="https://getbootstrap.com/docs/5.3/examples/dashboard/dashboard.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
 </head>
-<!-- BASED FROM `view-source:https://getbootstrap.com/docs/5.3/examples/dashboard/` ACCESSED 13/03/2025 - MIT LICENSE-->
 <body>
     <header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow" data-bs-theme="dark">
         <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="#">$COMPANY_NAME</a>
@@ -115,4 +115,5 @@ echo <<<EOT
 </body>
 </html>
 EOT;
+/* END SOURCE */
 }
