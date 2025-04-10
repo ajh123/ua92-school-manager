@@ -3,7 +3,7 @@ include_once __DIR__  . "/forms.php";
 include_once __DIR__  . "/../config.php";
 include_once __DIR__  . "/./permissions.php";
 
-function begin_layout($page, $uid=null) {
+function begin_layout($page) {
     global $COMPANY_NAME;
 
     $u = $_SESSION["user"];
@@ -74,7 +74,7 @@ echo <<<EOT
 EOT;
 
 foreach (allowed_tables as $table) {
-    if (has_permission($uid, strtolower("table.$table.view"))) {
+    if (has_permission($u, strtolower("table.$table.view"))) {
         echo "<li class='nav-item'> <a class='nav-link d-flex align-items-center gap-2' href='/query.php?table=$table'> All $table </a> </li>";
     }
 }

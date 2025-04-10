@@ -14,9 +14,9 @@ $u = $_SESSION["user"];
 $table = $_GET["table"];
 ?>
 
-<?php begin_layout("Showing $table", $u["id"]); ?>
+<?php begin_layout("Showing $table"); ?>
 <h2>Showing <?php echo $table; ?></h2>
 <div class="table-responsive small">
-    <?php echo_table($table, $u["id"]); ?>
+    <?php echo_table($table, $u); ?>
 </div>
 <?php end_layout(); ?>

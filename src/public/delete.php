@@ -23,7 +23,7 @@ $isError = false;
 $message = "";
 
 $deletePermission = strtolower("table.$table.delete");
-$deleteable = has_permission($u["id"], $deletePermission);
+$deleteable = has_permission($u, $deletePermission);
 
 if (!$deleteable) {
     $isError = true;
@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $deleteable == true) {
 }
 ?>
 
-<?php begin_layout("Delete from $table", $u["id"]); ?>
+<?php begin_layout("Delete from $table"); ?>
 <h2>Delete from <?php echo $table; ?></h2>
 
 <?php

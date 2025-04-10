@@ -23,7 +23,7 @@ $isError = false;
 $message = "";
 
 $updatePermisson = strtolower("table.$table.update");
-$updatable = has_permission($u["id"], $updatePermisson);
+$updatable = has_permission($u, $updatePermisson);
 
 if (!$updatable) {
     $isError = true;
@@ -88,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $updatable == true) {
 }
 ?>
 
-<?php begin_layout("Update $table", $u["id"]); ?>
+<?php begin_layout("Update $table"); ?>
 <h2>Update <?php echo $table; ?></h2>
 
 <?php

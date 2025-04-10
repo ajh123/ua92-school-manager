@@ -11,7 +11,7 @@ if (!is_logged_in()) {
 $u = $_SESSION["user"];
 ?>
 
-<?php begin_layout("Home", $u["id"]); ?>
+<?php begin_layout("Home"); ?>
 <h2>Home</h2>
 <div class="table-responsive small">
 

@@ -92,20 +92,20 @@ const allowed_tables = [
  * Renders a database table on the page.
  * 
  * @param string $name The name of the database table
- * @param int/null $uid The id of the current user viewing the table
+ * @param array/null $u The user object viewing the table
  */
-function echo_table($name, $uid=null) {
+function echo_table($name, $u=null) {
     $viewPermisson = strtolower("table.$name.view");
-    $viewable = has_permission($uid, $viewPermisson);
+    $viewable = has_permission($u, $viewPermisson);
 
     $updatePermisson = strtolower("table.$name.update");
-    $updateable = has_permission($uid, $updatePermisson);
+    $updateable = has_permission($u, $updatePermisson);
 
     $insertPermisson = strtolower("table.$name.insert");
-    $insertable = has_permission($uid, $insertPermisson);
+    $insertable = has_permission($u, $insertPermisson);
 
     $deletePermisson = strtolower("table.$name.delete");
-    $deleteable = has_permission($uid, $deletePermisson);
+    $deleteable = has_permission($u, $deletePermisson);
 
     if (!in_array($name, allowed_tables) | !$viewable) {
         echo "<div class='alert alert-danger' role='alert'>You are not allowed to access that table.</div>";

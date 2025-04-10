@@ -18,7 +18,7 @@ $isError = false;
 $message = "";
 
 $insertPermisson = strtolower("table.$table.insert");
-$insertable = has_permission($u["id"], $insertPermisson);
+$insertable = has_permission($u, $insertPermisson);
 
 if (!$insertable) {
     $isError = true;
@@ -78,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $insertable == true) {
 }
 ?>
 
-<?php begin_layout("Insert into $table", $u["id"]); ?>
+<?php begin_layout("Insert into $table"); ?>
 <h2>Insert into <?php echo $table; ?></h2>
 
 <?php

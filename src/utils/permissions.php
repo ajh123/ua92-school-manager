@@ -5,48 +5,38 @@ include_once __DIR__  . "/db.php";
  * For a given user, teturns an array of string where each
  * string represents a permission.
  * 
- * @param int $uid The user ID
+ * @param array $u The user object
  * @return string[] The array of permissions
  */
-function get_user_permissions($uid) {
+function get_user_permissions($u) {
     global $conn;
 
-    // First, get the user by id only
-    $sql = "SELECT * FROM Users WHERE id=?";    
+    $roleID = $u["roleID"];
+    // Second, get the role by id only
+    $sql = "SELECT * FROM Roles WHERE id=?";    
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $uid);
+    $stmt->bind_param("i", $roleID);
     $stmt->execute();
-    $result = $stmt->get_result();
+    $roleResult = $stmt->get_result();
 
-    if ($result->num_rows > 0) {
-        $data = $result->fetch_assoc();
-
-        $roleID = $data["roleID"];
-        // Second, get the role by id only
-        $sql = "SELECT * FROM Roles WHERE id=?";    
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("i", $roleID);
-        $stmt->execute();
-        $roleResult = $stmt->get_result();
-
-        if ($roleResult->num_rows > 0) {
-            $data = $roleResult->fetch_assoc();
-            $permissions = $data["permissions"];
-            // Third, convert the string into an array
-            return explode(";", $permissions);
-        }
+    if ($roleResult->num_rows > 0) {
+        $data = $roleResult->fetch_assoc();
+        $permissions = $data["permissions"];
+        // Third, convert the string into an array
+        return explode(";", $permissions);
     }
+
     return null;
 }
 
 /**
  * Returns a bolean if the user has the given permission.
  * 
- * @param int $uid The user ID
+ * @param array $u The user object
  * @param string $ppermission The permission name to check for
  */
-function has_permission($uid, $permission) {
-    $permissions = get_user_permissions($uid);
+function has_permission($u, $permission) {
+    $permissions = get_user_permissions($u);
     if ($permissions == null) {
         return false; // Return false
     }
