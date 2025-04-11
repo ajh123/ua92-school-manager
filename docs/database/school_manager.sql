@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 10.0.0.143
--- Generation Time: Apr 04, 2025 at 11:35 AM
+-- Generation Time: Apr 11, 2025 at 11:09 AM
 -- Server version: 11.7.2-MariaDB-ubu2404
 -- PHP Version: 8.3.17
 
@@ -421,7 +421,7 @@ ALTER TABLE `BookAssignments`
 -- AUTO_INCREMENT for table `Books`
 --
 ALTER TABLE `Books`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ClassAssignments`
@@ -469,7 +469,7 @@ ALTER TABLE `MedicalInformation`
 -- AUTO_INCREMENT for table `Roles`
 --
 ALTER TABLE `Roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `Salaries`
